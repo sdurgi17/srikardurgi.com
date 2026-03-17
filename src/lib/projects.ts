@@ -4,29 +4,16 @@ export interface Project {
   tech: string[];
   repo?: string;
   demo?: string;
+  thumbnail?: string;
 }
 
 export const projects: Project[] = [
   {
-    title: "Project Alpha",
+    title: "Missile Dodge",
     description:
-      "A high-throughput event processing pipeline built with Go and Kafka. Handles millions of events per day with sub-second latency.",
-    tech: ["Go", "Kafka", "PostgreSQL", "Docker"],
-    repo: "https://github.com/srikardurgi/project-alpha",
-  },
-  {
-    title: "Project Beta",
-    description:
-      "REST API framework with built-in authentication, rate limiting, and observability. Designed for rapid backend prototyping.",
-    tech: ["Python", "FastAPI", "Redis", "Prometheus"],
-    repo: "https://github.com/srikardurgi/project-beta",
-    demo: "https://project-beta.example.com",
-  },
-  {
-    title: "Project Gamma",
-    description:
-      "CLI tool for managing cloud infrastructure across multiple providers. Terraform-inspired but with a simpler mental model.",
-    tech: ["Rust", "AWS", "GCP", "Terraform"],
-    repo: "https://github.com/srikardurgi/project-gamma",
+      "A vibecoded arcade survival game. You're an unarmed jet in a sky full of homing missiles. Dodge, weave, and outmaneuver enemy fire — then redirect their own missiles back at them. Chain kills for combo multipliers and survive as long as you can in this neon-lit arcade survival game.",
+    tech: ["Vibecoding", "Game", "JavaScript"],
+    demo: "https://missiledodge.srikardurgi.com",
+    thumbnail: "/images/missile-dodge.png",
   },
 ];
