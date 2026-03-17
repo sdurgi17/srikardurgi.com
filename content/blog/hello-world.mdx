@@ -1,0 +1,48 @@
+---
+title: "Hello World: Building This Site"
+date: "2026-03-17"
+excerpt: "A quick look at how this site was built with Next.js, Tailwind CSS, and MDX — and why I chose a static export."
+tags: ["nextjs", "meta", "web"]
+---
+
+# Hello World
+
+Welcome to my blog. This is the first post — a quick look at how this site is built and the decisions behind it.
+
+## The Stack
+
+This site runs on **Next.js** with a static export, styled with **Tailwind CSS**, and uses **MDX** for blog posts. It's deployed to **GitHub Pages** via a simple GitHub Actions workflow.
+
+### Why Static?
+
+For a personal site and blog, static is the sweet spot:
+
+- **Fast** — HTML files served from a CDN, no server-side rendering
+- **Simple** — No database, no backend, no server to maintain
+- **Free** — GitHub Pages hosting costs nothing
+- **Portable** — It's just files; easy to move anywhere
+
+### Why MDX?
+
+MDX lets me write blog posts in Markdown but embed React components when I need something richer — interactive demos, custom callouts, or anything else.
+
+Here's a code example to show off syntax highlighting:
+
+```python
+def fibonacci(n: int) -> list[int]:
+    """Generate the first n Fibonacci numbers."""
+    if n <= 0:
+        return []
+
+    fib = [0, 1]
+    for i in range(2, n):
+        fib.append(fib[i-1] + fib[i-2])
+
+    return fib[:n]
+
+print(fibonacci(10))
+```
+
+## What's Next
+
+I'll be writing about backend engineering, systems design, and whatever else catches my attention. Stay tuned.
