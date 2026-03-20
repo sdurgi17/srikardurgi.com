@@ -2,7 +2,7 @@ import Link from "next/link";
 
 const socialLinks = [
   {
-    href: "https://github.com/srikardurgi",
+    href: "https://github.com/sdurgi17",
     label: "GitHub",
     icon: (
       <svg
@@ -17,7 +17,7 @@ const socialLinks = [
     ),
   },
   {
-    href: "https://linkedin.com/in/srikardurgi",
+    href: "https://www.linkedin.com/in/srikar-bhargav-durgi-81869773/",
     label: "LinkedIn",
     icon: (
       <svg
@@ -32,7 +32,7 @@ const socialLinks = [
     ),
   },
   {
-    href: "https://x.com/srikardurgi",
+    href: "https://x.com/sdurgi17",
     label: "X/Twitter",
     icon: (
       <svg
@@ -43,6 +43,21 @@ const socialLinks = [
         fill="currentColor"
       >
         <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+      </svg>
+    ),
+  },
+  {
+    href: "https://www.toptal.com/developers/resume/srikar-durgi",
+    label: "Toptal",
+    icon: (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="18"
+        height="18"
+        viewBox="0 0 24 24"
+        fill="currentColor"
+      >
+        <path d="M20.227 10.038L10.188 0l-2.04 2.04 3.773 3.769-8.155 8.153L13.807 24l2.039-2.039-3.772-3.771 8.16-8.152h-.007z" />
       </svg>
     ),
   },
