@@ -1,0 +1,138 @@
+---
+title: "How I Built a Full Arcade Game Without Writing a Single Line of Code"
+date: "2026-03-20"
+excerpt: "I vibe-coded a complete browser-based arcade game — Missile Dodge — using nothing but Claude Code and a design spec. Here's how conversation-driven development took it from idea to deployed, globally-ranked game."
+tags: ["vibecoding", "ai", "gamedev", "claude"]
+---
+
+I'm a software consultant by trade. I've spent years building systems for clients, reviewing architectures, and debugging production incidents. But I'd never built a game. So when I sat down with Claude Code one evening, I decided to push vibe coding to its limits — and build a complete, deployable arcade game from nothing but a design spec and conversation.
+
+The result is **Missile Dodge** — a browser-based survival game where you pilot an unarmed jet, dodging homing missiles fired by enemy jets and maneuvering so the missiles destroy the enemies instead. No weapons. Just skill, speed, and redirection.
+
+Here's how it came together.
+
+---
+
+## Starting with a Vision
+
+About 15 years ago, I played a game with a similar concept — an unarmed jet dodging missiles. I don't remember the name, but the feeling stuck with me. That tension of weaving through homing projectiles with nothing but speed and timing. When I decided to try vibe coding a game, that memory was the first thing that surfaced.
+
+I didn't jump straight into building. I spent time chatting with both Claude and ChatGPT to flesh out the idea and land on a solid spec. What should the physics feel like? How should enemies behave? What makes missile dodging feel fair vs. frustrating? Going back and forth across both AIs helped me pressure-test ideas and fill gaps I hadn't considered. The result was a detailed game design specification covering controls, physics, enemy types, missile behavior, scoring, wave progression, visual effects, and UI. Roughly 2,000 words describing exactly the game I wanted.
+
+The core fantasy: *you're outgunned but never outsmarted.*
+
+I handed the entire spec to Claude Code and said "build this." The first commit — `Game Init` — was a working game. Not a prototype. Not a skeleton. A playable, polished arcade game with momentum-based flight physics, homing missiles, three enemy types, particle effects, screen shake, combo scoring, and a full menu system. All in a single HTML file with zero external dependencies.
+
+Everything is rendered procedurally on a `<canvas>` element. No sprites, no images, no asset pipeline. Just math and pixels.
+
+## The Iteration Loop
+
+What happened next is where vibe coding gets interesting. The game was good, but not *right*. So began a rapid iteration cycle — each change a conversation, each deployment a `git push`.
+
+### Making It Feel Right
+
+The first thing I noticed was that missiles were too fast. They'd lock onto you and you had no breathing room. A simple "make the missiles slower by 25 percent" fixed the pacing entirely. The game went from frustrating to exhilarating — you could *almost* outrun them, which made dodging feel like a choice rather than panic.
+
+### The Difficulty Experiment
+
+I added three difficulty modes — Easy, Normal, and Hard — with a selection screen. Easy had slower missiles and a larger deflection radius. Hard had faster missiles and tighter margins.
+
+Then I removed them.
+
+The difficulty selection screen added friction before the fun. Players had to make a choice before they knew what the game felt like. And frankly, the "Easy" settings just felt better for everyone. The game is inherently difficult — you're dodging homing missiles with no weapons. You don't need a "Hard" mode to make that harder.
+
+So I collapsed everything to a single difficulty (the old Easy settings) and removed the selection screen entirely. One less decision. Faster to fun. This was a lesson in restraint — just because you *can* add options doesn't mean you should.
+
+### The Deflection Mechanic
+
+One of the most satisfying additions was missile deflection. When a missile passes close to an enemy jet, it bends toward the enemy. The pull strength increases the closer the missile gets — a nice physics-y feel that rewards precision flying.
+
+This turned the game from "dodge and hope" into "dodge and aim." You could intentionally thread missiles past enemies, using the deflection to redirect them into kills. The combo scoring system (up to 5x multiplier) rewards exactly this kind of risky play.
+
+### The Decoy
+
+I wanted a second ability beyond the afterburner boost. My first instinct was "flares" — the military countermeasure that distracts heat-seeking missiles. Claude built a system where pressing F deploys a stationary decoy that attracts nearby missiles, pulling them away from the player.
+
+But the name "flare" didn't fit. Real flares are a defensive burst that blinds missiles. What I'd built was a *decoy* — a fake target. So I renamed it. The mechanic stayed the same (deploy a magenta pulsing beacon that lures missiles for 3 seconds, 15-second cooldown), but the name now matched the behavior.
+
+This is a small thing, but naming matters. When players see "DECOY" in the HUD, they immediately understand what it does.
+
+### Extra Lives
+
+I added a heart pickup system — a blinking heart shape that spawns at a random location every 45 seconds and stays for 10 seconds before disappearing. Collecting it grants an extra life with a satisfying particle burst.
+
+This creates interesting risk/reward moments: do you fly across the map through a swarm of missiles to grab that heart, or play it safe? Combined with the combo system, these micro-decisions are what make the game feel deep despite its simplicity.
+
+## The Leaderboard Decision
+
+Local high scores are nice. Global leaderboards are addictive.
+
+I shared the game on LinkedIn and a friend suggested adding a global leaderboard so players could compete against each other. It was one of those suggestions that seems obvious in hindsight — of course people want to see how they stack up. This meant I needed a backend — but I didn't want to leave the Cloudflare ecosystem. The game was already deployed on Cloudflare Pages with auto-deploy on push to main. Adding infrastructure complexity would defeat the purpose of a single-file game.
+
+### KV vs D1
+
+Cloudflare offers two storage options that made sense: **KV** (key-value store) and **D1** (SQLite database).
+
+KV would work for a simple top-10 board. Store a JSON array, read it, sort it. But leaderboards are inherently relational — you want `ORDER BY score DESC LIMIT 50`, you want to count ranks, you want to filter by time period eventually. Doing this in KV means reading the entire dataset and sorting in memory every time.
+
+D1 gives you real SQL. `SELECT COUNT(*)+1 FROM scores WHERE score > ?` gives you a player's rank in one query. Indexes make sorting free. And if I later want daily/weekly/all-time boards, it's just a `WHERE created_at > datetime('now', '-7 days')`.
+
+I chose D1.
+
+### The Architecture
+
+The backend is minimal:
+
+- **`functions/api/scores.js`** — a single Cloudflare Pages Function with GET (fetch top 50) and POST (submit score, return rank) handlers
+- **D1 SQLite table** — `scores` with columns for name, score, stats, and timestamp, indexed on score descending
+- **Rate limiting** — max 3 submissions per name per minute, enforced server-side
+- **Input validation** — alphanumeric names only, non-negative integer scores
+
+The frontend adds two new game states: `NAME_ENTRY` (an HTML overlay with a styled input field before each game) and `LEADERBOARD` (a canvas-rendered scoreboard after game over). The state machine went from:
+
+```
+MENU → PLAYING ↔ PAUSED → GAME_OVER → MENU
+```
+
+to:
+
+```
+MENU → NAME_ENTRY → PLAYING ↔ PAUSED → GAME_OVER → LEADERBOARD → MENU
+```
+
+Score submission happens automatically on game over. The leaderboard fetch happens when transitioning to the LEADERBOARD state. Both are async with graceful offline fallbacks — the game works fine without a network connection, you just don't get global rankings.
+
+### Deployment
+
+The deployment story is clean:
+
+1. Create a D1 database: `npx wrangler d1 create missile-dodge-db`
+2. Run the migration: `npx wrangler d1 migrations apply missile-dodge-db --remote`
+3. Add the D1 binding in the Cloudflare dashboard
+4. `git push origin main`
+
+Cloudflare auto-detects the `functions/` directory and deploys the Pages Function alongside the static site. No separate API server. No CORS configuration headaches. No infrastructure to manage.
+
+## What I Learned
+
+### Vibe coding is iteration, not generation
+
+The first commit was impressive, but the game got *good* through 10 commits of refinement. Each one was a conversation: "make missiles slower," "add a decoy ability," "remove difficulty modes." The AI generates; the human tastes. The magic is in the feedback loop.
+
+### Constraints breed creativity
+
+A single HTML file. No dependencies. No build step. These constraints forced elegant solutions — procedural rendering instead of sprites, canvas-drawn UI instead of DOM elements, inline styles instead of CSS frameworks. The entire game is self-contained. Open the file in a browser and play.
+
+### Know when to subtract
+
+The difficulty modes were a good idea that made the game worse. The flare name was technically fine but semantically wrong. Sometimes the best commit is the one that removes code.
+
+### The gap between idea and product is nearly zero
+
+From "I want a game where you dodge missiles" to a deployed, globally-ranked arcade game — the entire journey happened in conversations. No tutorials. No boilerplate. No yak-shaving. Just describing what I wanted and refining until it felt right.
+
+---
+
+**Play the game at [missiledodge.srikardurgi.com](https://missiledodge.srikardurgi.com/)** and see if you can beat the leaderboard.
+
+The entire project — every line of code, every commit, every deployment — was vibe-coded with [Claude Code](https://claude.com/claude-code).
