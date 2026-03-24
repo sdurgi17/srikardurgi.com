@@ -16,6 +16,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: "https://srikardurgi.com/blog", lastModified: new Date() },
     { url: "https://srikardurgi.com/projects", lastModified: new Date() },
     { url: "https://srikardurgi.com/about", lastModified: new Date() },
+    { url: "https://srikardurgi.com/profile", lastModified: new Date() },
     ...blogEntries,
   ];
 }
