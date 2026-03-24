@@ -4,15 +4,15 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Profile",
   description:
-    "Professional profile of Srikar Bhargav Durgi — software consultant based in Hyderabad, India.",
+    "Professional profile of Srikar Bhargav Durgi — AI & software consultant based in Hyderabad, India.",
 };
 
 const skills = {
+  "AI/ML": ["OpenAI", "Claude API", "LLMs", "Agentic AI", "RAG", "Prompt Engineering", "LangChain", "TensorFlow", "n8n", "Vector Databases"],
   Languages: ["Python", "Java", "JavaScript", "PHP", "SQL", "C++"],
   Frameworks: ["Django", "Spring", "Flask", "Laravel", "React", "Node.js"],
   Databases: ["PostgreSQL", "MySQL", "MongoDB", "Redis", "Elasticsearch"],
   Infrastructure: ["AWS", "GCP", "Azure", "Docker", "Kubernetes", "Nginx"],
-  "AI/ML": ["OpenAI", "LLMs", "Agentic AI", "TensorFlow", "n8n"],
 };
 
 const experience = [
@@ -23,14 +23,15 @@ const experience = [
     location: "Hyderabad",
     period: "2017 \u2013 Present",
     bullets: [
-      "Founded and evolved a software consultancy, transitioning from an individual contributor to providing strategic advisory and technical resources to global clients across the US, Israel, and India.",
-      "Occupied varied roles across engagements \u2014 from Senior Developer to Engineering Manager \u2014 ensuring the delivery of scalable and efficient software solutions tailored to each client\u2019s domain.",
+      "Founded a software consultancy focused on AI integration, automation, and full-stack development \u2014 serving global clients across the US, Israel, and India.",
+      "Served as Senior Developer, Engineering Manager, and AI Solutions Architect across engagements \u2014 scoping, building, and deploying AI-augmented software tailored to each client\u2019s domain.",
       "Led end-to-end backend development for an AI-powered call intelligence platform that transforms sales and support conversations into actionable insights using LLMs and agentic workflows.",
       "Optimized API costs of a POS system by 80% and Snowflake costs by 75% through targeted query refactoring, caching strategies, and integration improvements.",
       "Built automation pipelines using n8n and OpenAI to streamline client onboarding, lead scoring, and CRM data enrichment for HubSpot-based sales teams.",
-      "Managed end-to-end project cycles from ideation to deployment, consistently exceeding client expectations and achieving high retention rates across multi-year engagements.",
+      "Advised clients on AI adoption strategy \u2014 evaluating LLM provider options, identifying high-ROI automation opportunities, and designing integration architectures for existing tech stacks.",
+      "Managed end-to-end AI and software project cycles from ideation to deployment, consistently exceeding client expectations and achieving high retention rates across multi-year engagements.",
     ],
-    tech: ["Python", "Django", "GCP", "HubSpot", "Agentic AI", "n8n", "OpenAI"],
+    tech: ["Python", "Django", "GCP", "HubSpot", "Agentic AI", "n8n", "OpenAI", "LLMs", "RAG", "Prompt Engineering"],
   },
   {
     role: "Tech Lead",
@@ -68,11 +69,11 @@ const experience = [
     location: "Tel-Aviv",
     period: "2021",
     bullets: [
-      "Built a scalable audio processing data pipeline using Azure serverless functions to handle real-time transcription of drive-through audio for an AI-powered voice ordering platform.",
-      "Developed data validation and quality assurance APIs to ensure transcription accuracy and flag anomalies before downstream ML model consumption.",
+      "Built a scalable ML data pipeline using Azure serverless functions to handle real-time audio transcription for an AI-powered voice ordering platform, feeding downstream speech-to-text models.",
+      "Developed data validation and QA APIs to ensure transcription accuracy and flag anomalies before downstream ML model training and inference.",
       "Collaborated with a distributed team to integrate the pipeline into the existing microservices architecture running on Kubernetes.",
     ],
-    tech: ["Python", "Azure", "Docker", "Kubernetes"],
+    tech: ["Python", "Azure", "Docker", "Kubernetes", "ML Pipelines", "Serverless"],
   },
   {
     role: "Sr. Software Developer",
@@ -96,7 +97,7 @@ const experience = [
     bullets: [
       "Built a full email open and click tracking system from scratch, providing real-time analytics on campaign engagement for the ad-tech platform\u2019s publisher communications.",
       "Led a migration of static assets and templates to S3-based deployments, reducing deployment cycles by 60% and decoupling frontend releases from backend deploys.",
-      "Implemented a multi-armed bandit algorithm for email template optimization, dynamically selecting the highest-performing templates based on click-through rate to maximize engagement.",
+      "Implemented a multi-armed bandit algorithm (applied ML) for email template optimization, dynamically selecting the highest-performing templates based on click-through rate to maximize engagement.",
     ],
     tech: ["PHP", "Laravel", "MySQL", "Redis", "Node.js", "AWS S3"],
   },
@@ -108,7 +109,7 @@ const experience = [
     period: "2015",
     bullets: [
       "Developed a locality-based price trends API that aggregated and visualized real estate pricing data across neighborhoods, powering key consumer-facing features on India\u2019s leading property platform.",
-      "Built user profiling modules to segment and personalize property recommendations based on browsing behavior and search patterns.",
+      "Built user profiling and recommendation modules using behavioral signals and search patterns to personalize property listings \u2014 an early application of ML-driven personalization at scale.",
       "Designed and implemented data pipelines to migrate and sync data from MongoDB to Elasticsearch, enabling fast full-text search and geo-spatial queries across millions of property listings.",
     ],
     tech: ["Python", "Django", "PostgreSQL", "MongoDB", "Elasticsearch"],
@@ -136,14 +137,16 @@ export default function ProfilePage() {
           Srikar Bhargav Durgi
         </h1>
         <p className="mt-1 text-lg text-muted">
-          Software Consultant &middot; Hyderabad, India
+          AI &amp; Software Consultant &middot; Hyderabad, India
         </p>
         <p className="mt-4 leading-relaxed text-muted">
-          Technology agnostic with a proven track record of creating new web
-          applications from MVP to production. Delivered dashboards to automate
-          workflows, trained structural engineers in Python reducing development
-          time for new products, and developed payment authorization POCs via
-          WebSocket significantly decreasing transaction times.
+          Software consultant specializing in AI integration and intelligent
+          automation for business operations. Built AI-powered call intelligence
+          platforms using LLMs and agentic workflows, designed automation
+          pipelines with OpenAI and n8n for CRM enrichment and lead scoring, and
+          delivered scalable data pipelines for ML-driven products. 10+ years
+          building production systems across Python, Django, AWS, GCP, and Azure
+          &mdash; now focused on helping companies operationalize AI.
         </p>
         <div className="mt-4 flex flex-wrap gap-4 text-sm">
           <a
@@ -293,8 +296,10 @@ export default function ProfilePage() {
       <section>
         <h2 className="text-xl font-semibold tracking-tight">Highlights</h2>
         <ul className="mt-4 space-y-2 text-sm text-muted">
-          <li>Secured seat in IIIT Allahabad through AIEEE with 99.4 percentile</li>
-          <li>Selected for Amritapuri Regionals ACM ICPC 2014</li>
+          <li>Built AI-powered call intelligence platform processing thousands of sales conversations using LLMs</li>
+          <li>Designed and deployed OpenAI + n8n automation pipelines for CRM enrichment and lead scoring</li>
+          <li>Toptal member since 2020 (Top 3% of developers)</li>
+          <li>IIIT Allahabad alumnus &mdash; ACM ICPC regionalist</li>
           <li>
             Finished Basic Mountaineering Course at ABVIMAS &mdash;{" "}
             <Link
@@ -304,7 +309,6 @@ export default function ProfilePage() {
               read the blog post
             </Link>
           </li>
-          <li>Toptal member since 2020</li>
         </ul>
       </section>
     </div>
