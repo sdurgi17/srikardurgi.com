@@ -49,7 +49,7 @@ export function ProjectCard({ project }: { project: Project }) {
               rel="noopener noreferrer"
               className="text-accent transition-colors hover:underline"
             >
-              Play
+              Visit
             </a>
           )}
         </div>

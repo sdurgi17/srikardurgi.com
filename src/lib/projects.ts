@@ -16,4 +16,12 @@ export const projects: Project[] = [
     demo: "https://missiledodge.srikardurgi.com",
     thumbnail: "/images/missile-dodge.png",
   },
+  {
+    title: "Networth Tracker",
+    description:
+      "A personal finance app that lets users track their net worth over time. Add assets and liabilities across categories, monitor balances, and visualize how your net worth evolves.",
+    tech: ["Finance", "Full-Stack", "Vibecoding"],
+    demo: "https://networth.primabyte.com",
+    thumbnail: "/images/networth-tracker.png",
+  },
 ];
