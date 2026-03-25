@@ -27,11 +27,25 @@ const experience = [
       "Served as Senior Developer, Engineering Manager, and AI Solutions Architect across engagements \u2014 scoping, building, and deploying AI-augmented software tailored to each client\u2019s domain.",
       "Led end-to-end backend development for an AI-powered call intelligence platform that transforms sales and support conversations into actionable insights using LLMs and agentic workflows.",
       "Optimized API costs of a POS system by 80% and Snowflake costs by 75% through targeted query refactoring, caching strategies, and integration improvements.",
-      "Built automation pipelines using n8n and OpenAI to streamline client onboarding, lead scoring, and CRM data enrichment for HubSpot-based sales teams.",
+      "Built automation pipelines to streamline client onboarding, lead scoring, and CRM data enrichment for HubSpot-based sales teams.",
       "Advised clients on AI adoption strategy \u2014 evaluating LLM provider options, identifying high-ROI automation opportunities, and designing integration architectures for existing tech stacks.",
       "Managed end-to-end AI and software project cycles from ideation to deployment, consistently exceeding client expectations and achieving high retention rates across multi-year engagements.",
     ],
     tech: ["Python", "Django", "GCP", "HubSpot", "Agentic AI", "n8n", "OpenAI", "LLMs", "RAG", "Prompt Engineering"],
+  },
+  {
+    role: "Lead Architect",
+    company: "TOCA Football Inc.",
+    url: "https://tocafootball.com",
+    location: "Remote",
+    period: "2021 \u2013 Present",
+    bullets: [
+      "Architected and built a multi-platform integration system that syncs booking and customer data from various scheduling platforms into HubSpot CRM, powering marketing automation for a sports training company operating across multiple US facilities.",
+      "Designed and implemented a comprehensive automated test suite with CI/CD pipelines on AWS, ensuring reliable deployments across staging and production environments.",
+      "Created real-time monitoring and alerting systems on AWS CloudWatch and Google Chat to detect and notify the team of data sync failures, API errors, and anomalous incidents.",
+      "Optimized third-party API usage patterns and implemented intelligent rate limiting and caching, decreasing external API costs by more than 50%.",
+    ],
+    tech: ["Python", "Django", "AWS", "React", "Docker", "HubSpot", "TDD"],
   },
   {
     role: "Tech Lead",
@@ -47,20 +61,6 @@ const experience = [
       "Owned the full DevOps lifecycle including Docker-based deployments, Nginx configuration, and CI/CD pipeline management for the engineering platform.",
     ],
     tech: ["Django", "React", "MySQL", "Docker", "Nginx", "Redis"],
-  },
-  {
-    role: "Lead Architect",
-    company: "TOCA Football Inc.",
-    url: "https://tocafootball.com",
-    location: "Remote",
-    period: "2021 \u2013 Present",
-    bullets: [
-      "Architected and built a multi-platform integration system that syncs booking and customer data from various scheduling platforms into HubSpot CRM, powering marketing automation for a sports training company operating across multiple US facilities.",
-      "Designed and implemented a comprehensive automated test suite with CI/CD pipelines on AWS, ensuring reliable deployments across staging and production environments.",
-      "Created real-time monitoring and alerting systems on AWS CloudWatch and Google Chat to detect and notify the team of data sync failures, API errors, and anomalous incidents.",
-      "Optimized third-party API usage patterns and implemented intelligent rate limiting and caching, decreasing external API costs by more than 50%.",
-    ],
-    tech: ["Python", "Django", "AWS", "React", "Docker", "HubSpot", "TDD"],
   },
   {
     role: "Sr. Python Developer",
@@ -143,7 +143,7 @@ export default function ProfilePage() {
           Software consultant specializing in AI integration and intelligent
           automation for business operations. Built AI-powered call intelligence
           platforms using LLMs and agentic workflows, designed automation
-          pipelines with OpenAI and n8n for CRM enrichment and lead scoring, and
+          pipelines for CRM enrichment and lead scoring, and
           delivered scalable data pipelines for ML-driven products. 10+ years
           building production systems across Python, Django, AWS, GCP, and Azure
           &mdash; now focused on helping companies operationalize AI.
@@ -297,7 +297,7 @@ export default function ProfilePage() {
         <h2 className="text-xl font-semibold tracking-tight">Highlights</h2>
         <ul className="mt-4 space-y-2 text-sm text-muted">
           <li>Built AI-powered call intelligence platform processing thousands of sales conversations using LLMs</li>
-          <li>Designed and deployed OpenAI + n8n automation pipelines for CRM enrichment and lead scoring</li>
+          <li>Designed and deployed automation pipelines for CRM enrichment and lead scoring</li>
           <li>Toptal member since 2020 (Top 3% of developers)</li>
           <li>IIIT Allahabad alumnus &mdash; ACM ICPC regionalist</li>
           <li>
