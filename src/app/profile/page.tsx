@@ -163,6 +163,14 @@ export default function ProfilePage() {
         </p>
         <div className="mt-4 flex flex-wrap gap-4 text-sm">
           <a
+            href="https://pinnaclecode.tech"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-accent hover:underline"
+          >
+            Pinnaclecode
+          </a>
+          <a
             href="https://www.linkedin.com/in/srikar-bhargav-durgi-81869773/"
             target="_blank"
             rel="noopener noreferrer"
