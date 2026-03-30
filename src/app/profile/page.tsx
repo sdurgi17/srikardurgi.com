@@ -34,6 +34,19 @@ const experience = [
     tech: ["Python", "Django", "GCP", "HubSpot", "Agentic AI", "n8n", "OpenAI", "LLMs", "RAG", "Prompt Engineering"],
   },
   {
+    role: "Software Consultant",
+    company: "Toptal (Top 3% Network)",
+    url: "https://www.toptal.com/developers/resume/srikar-durgi",
+    location: "Remote",
+    period: "2020 \u2013 Present",
+    bullets: [
+      "Selected into Toptal\u2019s exclusive network of the top 3% of freelance software engineers after a rigorous multi-stage screening process.",
+      "Served enterprise clients through the platform, including HiAuto (AI-powered voice ordering) \u2014 building ML data pipelines, backend APIs, and cloud infrastructure.",
+      "Maintained a strong client satisfaction record across engagements spanning Python, Django, cloud platforms, and AI/ML integration.",
+    ],
+    tech: ["Python", "Django", "AWS", "Azure", "Docker", "Kubernetes"],
+  },
+  {
     role: "Lead Architect",
     company: "TOCA Football Inc.",
     url: "https://tocafootball.com",
@@ -64,7 +77,7 @@ const experience = [
   },
   {
     role: "Sr. Python Developer",
-    company: "HiAuto via Toptal",
+    company: "HiAuto",
     url: "https://hi.auto/",
     location: "Tel-Aviv",
     period: "2021",
